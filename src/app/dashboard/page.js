@@ -1,4 +1,4 @@
-import Items from "./Components/fetchItems";
+import Items from "./Components/FetchItems";
 
 const Main = () => {
     return (
