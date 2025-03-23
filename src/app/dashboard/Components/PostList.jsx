@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from "react";
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts = [] }) => {  // Ensure posts is always an array
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
-    const [filteredPosts, setFilteredPosts] = useState(posts);
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
 
     useEffect(() => {
-        if (posts) {
-            setLoading(false);
+        if (Array.isArray(posts) && posts.length > 0) {
             setFilteredPosts(posts);
+            setLoading(false);
         }
     }, [posts]);
 
@@ -32,7 +32,7 @@ const PostList = ({ posts }) => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+    const totalPages = Math.max(1, Math.ceil(filteredPosts.length / postsPerPage));
 
     return (
         <div className="flex flex-col items-center justify-between px-5 sm:h-screen">
@@ -76,14 +76,19 @@ const PostList = ({ posts }) => {
                 <button
                     className="px-4 cursor-pointer py-1 border rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
                     disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(currentPage - 1)}> Prev
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                    Prev
                 </button>
 
                 <span className="px-3 py-1">{currentPage} / {totalPages}</span>
+
                 <button
                     className="px-4 cursor-pointer py-1 border rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
                     disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(currentPage + 1)}> Next
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                    Next
                 </button>
             </div>
         </div>
