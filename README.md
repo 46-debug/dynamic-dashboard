@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dynamic Dashboard
 
-## Getting Started
+A simple authentication-based dashboard with protected routes, pagination, and search functionality.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Login Page**
+
+  - Email and password fields with validation.
+  - Stores mock JWT token and user email in local storage upon login.
+  - Redirects to `/dashboard` after successful login.
+
+- **Dashboard**
+
+  - Header, Sidebar, and Main content sections.
+  - **Header**
+    - Displays logged-in user's email.
+    - Logout button that removes JWT token from local storage and redirects to the login page.
+  - **Sidebar**
+    - Contains three routes: `Dashboard`, `Profile`, and `Settings`.
+    - Clicking a route redirects to the respective page.
+  - **Main Content**
+    - Displays a list of posts with **pagination** (5 posts per page).
+    - Posts are **fetched in a server component** and passed to the client component for **search** and **pagination** features.
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/46-debug/dynamic-dashboard.git
+cd <dynamic-dashboard>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Start the Development Server
 
-## Learn More
+```sh
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+The app should now be running at `http://localhost:3000/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running the Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Login** with a valid email and password.
+2. You will be redirected to the **Dashboard**.
+3. The **Sidebar** allows navigation between `Dashboard`, `Profile`, and `Settings`.
+4. The **Main Content** displays posts with **search and pagination** features.
+5. Click **Logout** to remove the token and return to the login page.
 
-## Deploy on Vercel
+## Technologies Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js** (React framework for SSR)
+- **Tailwind CSS** (Styling)
+- **Local Storage** (Token management)
+- **Mock API** (Fetching posts)
+- **Server Components** (Fetching posts in the server component and passing to the client component)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- Ensure the **mock API endpoint** is accessible when fetching posts.
+- Use a **valid email format** in the login form for proper validation.
+- The project is structured with **client and server components** for better performance.
+
